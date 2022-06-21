@@ -1,5 +1,9 @@
 import 'package:hrm_app/base/base_page.dart';
 import 'package:hrm_app/pages/home_page/home_page_controller.dart';
+import 'package:hrm_app/pages/widgets/anunnel/anunnel_page.dart';
+import 'package:hrm_app/pages/widgets/dashboard/dashboard.dart';
+import 'package:hrm_app/pages/widgets/info/info_page.dart';
+import 'package:hrm_app/pages/widgets/timekeeping/time_keeping_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class HomePage extends BaseScreen<HomePageController> {
@@ -9,10 +13,10 @@ class HomePage extends BaseScreen<HomePageController> {
   HomePageController putController() => HomePageController();
 
   final List<Widget> _listTab = [
-    const SizedBox(),
-    const SizedBox(),
-    const SizedBox(),
-    const SizedBox(),
+    Dashboard(),
+    TimeKeepingPage(),
+    AnunnelPage(),
+    InfoPage(),
   ];
 
   @override

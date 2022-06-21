@@ -1,12 +1,12 @@
 import 'package:hrm_app/base/base_page.dart';
 import 'package:hrm_app/pages/login_page/login_controller.dart';
-import 'package:hrm_app/routers/app_routes.dart';
+import 'package:hrm_app/respository/login_repository.dart';
 
 class LoginPage extends BaseScreen<LoginController> {
   LoginPage({Key? key}) : super(key: key);
 
   @override
-  LoginController putController() => LoginController();
+  LoginController putController() => LoginController(Get.put(LoginRepository()));
 
   @override
   Widget builder() {
@@ -71,15 +71,14 @@ class LoginPage extends BaseScreen<LoginController> {
                       FlatButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0)),
-                        color: const Color.fromRGBO(108, 196, 152, 1),
+                        color: const Color(0xFF050B5B),
                         textColor: Colors.white,
                         child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal:64.0,vertical: 8.0),
+                          padding: EdgeInsets.symmetric(horizontal:64.0,vertical: 12.0),
                           child: Text("Login"),
                         ),
                         onPressed: () => {
-                          // controller.login()
-                          Get.toNamed(AppRouter.routerHome)
+                          controller.login()
                         }
                       )
                     else

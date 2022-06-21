@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hrm_app/routers/app_routes.dart';
+import 'package:hrm_app/services/auth_service.dart';
 import 'package:hrm_app/widgets/loading_wrapper.dart';
 
 class App extends StatefulWidget {
@@ -44,6 +45,11 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return DismissKeyboard(
           child: GetMaterialApp(
+            initialBinding: BindingsBuilder(
+              () {
+                Get.put(AuthService());
+              },
+            ),
             enableLog: true,
             debugShowCheckedModeBanner: false,
             title: 'APP',
