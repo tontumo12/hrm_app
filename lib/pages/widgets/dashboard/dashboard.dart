@@ -19,8 +19,9 @@ class Dashboard extends BaseScreen<DashboardController>{
         preferredSize: const Size.fromHeight(50),
         child: HeaderAppBarMasTer(
           title: 'Trang chủ',
+          iconRight: const Icon(Icons.add),
           functionLeft: () {},
-          functionRight: () {},
+          functionRight: () => controller.showAddChildAssetModal(context),
         )
       ),
       drawer: DrawWidget(),

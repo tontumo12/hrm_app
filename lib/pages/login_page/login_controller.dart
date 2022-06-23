@@ -38,14 +38,20 @@ class LoginController extends BaseController {
         "userName":usernameTextController.text,
         "passWord": md5.convert(utf8.encode(passwordTextController.text)).toString()
       };
+      print('11111111111111111');
       String response = await loginRepository.postLogin(data);
+      print('11111111111111111');
       Map<String, dynamic> payload = Jwt.parseJwt(response);
+      print('11111111111111111');
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      print('11111111111111111');
       sharedPreferences.setString("token", response);
+      print('11111111111111111');
       sharedPreferences.setString("userInfo", jsonEncode(payload));
       isLoading = false.obs;
       Get.toNamed(AppRouter.routerHome);
     } catch (err) {
+      print('tunt');
       print(err);
     }
   }

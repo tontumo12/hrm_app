@@ -1,6 +1,7 @@
 import 'package:hrm_app/base/base_page.dart';
 import 'package:hrm_app/pages/login_page/login_controller.dart';
 import 'package:hrm_app/respository/login_repository.dart';
+import 'package:hrm_app/routers/app_routes.dart';
 
 class LoginPage extends BaseScreen<LoginController> {
   LoginPage({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class LoginPage extends BaseScreen<LoginController> {
                   ),
                 ),
                 const SizedBox(height: 30.0,),
-                Row(
+                Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     if(!controller.isLoading.value)
@@ -77,8 +78,9 @@ class LoginPage extends BaseScreen<LoginController> {
                           padding: EdgeInsets.symmetric(horizontal:64.0,vertical: 12.0),
                           child: Text("Login"),
                         ),
-                        onPressed: () => {
-                          controller.login()
+                        onPressed: () {
+                          // Get.toNamed(AppRouter.routerHome);
+                          controller.login();
                         }
                       )
                     else
@@ -87,7 +89,7 @@ class LoginPage extends BaseScreen<LoginController> {
                         semanticsLabel: 'Linear progress indicator',
                       ),
                   ],
-                )
+                ))
               ],
             )
           ),

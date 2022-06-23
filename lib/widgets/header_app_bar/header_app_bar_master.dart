@@ -40,7 +40,7 @@ class HeaderAppBarMasTer extends BaseScreen<HeaderAppBarController> {
       actions: [
         InkWell(
           child: iconRight ?? const Icon(Icons.logout),
-          onTap: functionRight(),
+          onTap: () {functionRight();},
         )
       ],
       elevation: 0.0,

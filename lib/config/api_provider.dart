@@ -7,7 +7,7 @@ import 'package:hrm_app/config/custom_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiProvider {
-  final _baseUrl = 'http://192.168.1.18:9001/';
+  final _baseUrl = 'http://192.168.1.5:9001/';
 
   Future<String?> tokenCover() async{
     SharedPreferences sharedPreferences;

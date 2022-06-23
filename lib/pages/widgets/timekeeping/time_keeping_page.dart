@@ -78,7 +78,9 @@ class TimeKeepingPage extends BaseScreen<TimeKeepingController>{
                   )),
                 ],
               ),
-              onTap: () {}
+              onTap: () {
+                controller.showAddChildAssetModal(context);
+              }
             ),
             const SizedBox(height: 20),
             Padding(

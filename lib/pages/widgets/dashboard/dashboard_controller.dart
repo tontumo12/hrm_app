@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:hrm_app/base/base_controller.dart';
 import 'package:hrm_app/models/work/work_model.dart';
 import 'package:hrm_app/pages/detail_page/detail_controller.dart';
+import 'package:hrm_app/pages/widgets/dialog/dialog_create_work/create_work.dart';
 import 'package:hrm_app/respository/work_repository.dart';
 import 'package:hrm_app/routers/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,5 +44,14 @@ class DashboardController extends BaseController{
   choiceDetail(int workId) {
     storeController.getListDataWorkTodo(workId);
     Get.toNamed(AppRouter.detailPage);
+  }
+
+  showAddChildAssetModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext bc) => CreateWork(),
+    );
   }
 }
