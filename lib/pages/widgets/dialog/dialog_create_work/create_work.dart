@@ -81,7 +81,10 @@ class CreateWork extends BaseScreen<CreateWorkController> {
                       },
                       child: TextField(
                         readOnly: true,
-                        controller: controller.dateLine),
+                        controller: controller.dateLine,
+                        onTap: () {
+                        controller.selectDate();
+                      },),
                     ),
                   ),
                 ]
@@ -100,7 +103,7 @@ class CreateWork extends BaseScreen<CreateWorkController> {
                         child: Text("Tạo công việc"),
                       ),
                       onPressed: () => {
-                        // controller.login()
+                        controller.createWork()
                         // Get.toNamed(AppRouter.routerHome)
                       }
                     ),

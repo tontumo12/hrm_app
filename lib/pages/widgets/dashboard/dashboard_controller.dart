@@ -43,6 +43,7 @@ class DashboardController extends BaseController{
 
   choiceDetail(int workId) {
     storeController.getListDataWorkTodo(workId);
+    storeController.getDetail(workId);
     Get.toNamed(AppRouter.detailPage);
   }
 

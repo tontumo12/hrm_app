@@ -1,5 +1,6 @@
 import 'package:hrm_app/config/api_provider.dart';
 import 'package:hrm_app/models/work/asign_user.dart';
+import 'package:hrm_app/models/work/work_detail.dart';
 import 'package:hrm_app/models/work/work_model.dart';
 
 class WorkRepository {
@@ -29,8 +30,8 @@ class WorkRepository {
 
   }
 
-  Future<String> portWork(Work body) async{
-    final data = await provider.post("work/create", body);
+  Future<dynamic> portWork(Work body) async{
+    final data = await provider.post("work/create", body.toJson());
     return data!['response'];
   }
 
@@ -39,8 +40,13 @@ class WorkRepository {
     return data!['response'];
   }
 
-    Future<String> portPerview(AsignUser body) async{
+  Future<String> portPerview(AsignUser body) async{
     final data = await provider.post("work/perview", body);
     return data!['response'];
+  }
+
+  Future<WorkDetail> getDetail(int workId) async{
+    final data = await provider.get('work/detail-work/${workId}', null);
+    return WorkDetail.fromMap(data!['response']);
   }
 }

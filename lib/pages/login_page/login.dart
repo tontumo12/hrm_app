@@ -57,9 +57,19 @@ class LoginPage extends BaseScreen<LoginController> {
                             border: OutlineInputBorder(),
                             suffixIcon: Icon(Icons.lock),
                             hintText: 'Password'
-                          )
-                        )
+                          ),
+                        ),
                       //)
+                      const SizedBox(height: 10.0,),
+                      TextField(
+                          //enabled: !loading,
+                          controller: controller.hostNameTextController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(Icons.http),
+                            hintText: 'HostName'
+                          )
+                      )
                     ]
                   ),
                 ),

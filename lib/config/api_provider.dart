@@ -7,7 +7,7 @@ import 'package:hrm_app/config/custom_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiProvider {
-  final _baseUrl = 'http://192.168.1.5:9001/';
+  // final _baseUrl = 'http://192.168.1.8:9001/';
 
   Future<String?> tokenCover() async{
     SharedPreferences sharedPreferences;
@@ -22,8 +22,9 @@ class ApiProvider {
     SharedPreferences sharedPreferences;
     sharedPreferences = await SharedPreferences.getInstance();
     String? token = sharedPreferences.getString("token");
+    String? hostName = sharedPreferences.getString("hostName");
     try {
-      var uri = _baseUrl + url;
+      var uri = (hostName ?? '') + url;
       if (params != null) {
         uri = uri + "?" + Uri(queryParameters: params).query;
       }
@@ -56,9 +57,11 @@ class ApiProvider {
     if(token != null && token != ""){
       headers['Authorization'] = 'Bearer ' + token;
     }
+    String? hostName = sharedPreferences.getString("hostName");
     try {
-      final response = await http.post(Uri.parse(_baseUrl + url),
-          body: json.encode(data),
+      print((hostName ?? '') + url);
+      final response = await http.post(Uri.parse((hostName ?? '') + url),
+          body: data,
           headers: headers);
       responseJson = _response(response);
     } on SocketException {
@@ -79,8 +82,9 @@ class ApiProvider {
     if(token != null){
       headers['Authorization'] = 'Bearer ' + token;
     }
+    String? hostName = sharedPreferences.getString("hostName");
     try {
-      final response = await http.put(Uri.parse(_baseUrl + url),
+      final response = await http.put(Uri.parse((hostName ?? '') + url),
           body: json.encode(data),
           headers: headers);
       responseJson = _response(response);

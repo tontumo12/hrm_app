@@ -71,23 +71,6 @@ class Dashboard extends BaseScreen<DashboardController>{
                                   )),
                                 ],
                               ),
-                              const SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  const Icon(Icons.supervisor_account),
-                                  const SizedBox(width: 10),
-                                  Text('Người làm:', style: TextUtils().mediumQuickSand.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold
-                                  )),
-                                  const SizedBox(width: 10),
-                                  Text('Nguyễn tôn tú', style: TextUtils().mediumQuickSand.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green
-                                  )),
-                                ],
-                              )
                             ]
                           )
                         ),

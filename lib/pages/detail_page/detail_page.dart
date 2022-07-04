@@ -23,7 +23,7 @@ class DetailPage extends BaseScreen<DetailController>{
         )
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child:Obx(() => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
@@ -35,7 +35,7 @@ class DetailPage extends BaseScreen<DetailController>{
                   color: Colors.white,
                   child: Row(
                     children: [
-                      Text('TEst giao diện', style: TextUtils().boldQuickSand.copyWith(
+                      Text(controller.dataDetail.value.workTitle, style: TextUtils().boldQuickSand.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.bold
                       )),
@@ -63,7 +63,7 @@ class DetailPage extends BaseScreen<DetailController>{
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text('nội dung công việc rất chi là dài thườn thượt', style: TextUtils().boldQuickSand.copyWith(
+                        child: Text(controller.dataDetail.value.workDetail, style: TextUtils().boldQuickSand.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.bold
                         )),
@@ -74,25 +74,26 @@ class DetailPage extends BaseScreen<DetailController>{
               )
             ),
             SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.supervisor_account),
-                  const SizedBox(width: 10),
-                  Text('Người làm:', style: TextUtils().mediumQuickSand.copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold
-                  )),
-                  const SizedBox(width: 10),
-                  Text('Nguyễn tôn tú', style: TextUtils().mediumQuickSand.copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green
-                  )),
-                ],
+            if(controller.dataDetail.value.assignUser.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    const Icon(Icons.supervisor_account),
+                    const SizedBox(width: 10),
+                    Text('Người làm:', style: TextUtils().mediumQuickSand.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold
+                    )),
+                    const SizedBox(width: 10),
+                    Text(controller.dataDetail.value.assignUser[0].userName, style: TextUtils().mediumQuickSand.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green
+                    )),
+                  ],
+                ),
               ),
-            ),
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -140,7 +141,7 @@ class DetailPage extends BaseScreen<DetailController>{
                                 children: [
                                   const Icon(Icons.supervisor_account),
                                   const SizedBox(width: 10),
-                                  Text('User:', style: TextUtils().mediumQuickSand.copyWith(
+                                  Text(data.userName + ": ", style: TextUtils().mediumQuickSand.copyWith(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold
                                   )),
@@ -190,7 +191,7 @@ class DetailPage extends BaseScreen<DetailController>{
             SizedBox(height: 10),
           ]
         ),
-      )
+      ))
     );
   }
 }

@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:hrm_app/base/base_controller.dart';
 import 'package:hrm_app/models/comment/comment_contract.dart';
 import 'package:hrm_app/models/comment/comment_model.dart';
+import 'package:hrm_app/models/work/work_detail.dart';
 import 'package:hrm_app/respository/comment_repository.dart';
+import 'package:hrm_app/respository/work_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailController extends BaseController {
@@ -11,8 +13,21 @@ class DetailController extends BaseController {
   TextEditingController commentTextController = TextEditingController();
 
   CommentRepository commentRepository = CommentRepository();
+  WorkRepository workRepository = WorkRepository();
 
   RxList<Comment> data = <Comment>[].obs;
+
+  Rx<WorkDetail> dataDetail = WorkDetail(
+    workId: 0,
+    workIdParent: 0,
+    departmentId: 0,
+    status: 0,
+    dateLine: '',
+    workTitle: '',
+    workDetail: '',
+    assignUser: [],
+    reviewUser: []
+  ).obs;
 
   RxInt wworkIddataa = 0.obs;
 
@@ -30,6 +45,17 @@ class DetailController extends BaseController {
       wworkIddataa.value = wworkId;
       data.value = await commentRepository.getWorkComment(wworkId);
       data.refresh();
+    }catch(err){
+      print(err);
+    }
+  }
+
+  Future<void> getDetail(int wworkId) async{
+    try{
+      wworkIddataa.value = wworkId;
+      dataDetail.value = await workRepository.getDetail(wworkId);
+      print(dataDetail.value.workDetail);
+      dataDetail.refresh();
     }catch(err){
       print(err);
     }

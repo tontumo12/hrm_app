@@ -15,6 +15,7 @@ class LoginController extends BaseController {
 
   TextEditingController usernameTextController = TextEditingController();
   TextEditingController passwordTextController = TextEditingController();
+  TextEditingController hostNameTextController = TextEditingController();
 
   RxBool isLoading = false.obs;
 
@@ -33,20 +34,17 @@ class LoginController extends BaseController {
 
   Future<void> login() async {
     try{
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setString("hostName", hostNameTextController.text);
       isLoading = true.obs;
       Map data = {
         "userName":usernameTextController.text,
         "passWord": md5.convert(utf8.encode(passwordTextController.text)).toString()
       };
-      print('11111111111111111');
-      String response = await loginRepository.postLogin(data);
-      print('11111111111111111');
+      String response = await loginRepository.postLogin(jsonEncode(data));
       Map<String, dynamic> payload = Jwt.parseJwt(response);
-      print('11111111111111111');
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      print('11111111111111111');
       sharedPreferences.setString("token", response);
-      print('11111111111111111');
+      print(response);
       sharedPreferences.setString("userInfo", jsonEncode(payload));
       isLoading = false.obs;
       Get.toNamed(AppRouter.routerHome);

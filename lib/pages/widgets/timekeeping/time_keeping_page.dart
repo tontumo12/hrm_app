@@ -1,5 +1,6 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:hrm_app/base/base_page.dart';
+import 'package:hrm_app/models/timekeeping/timekeeping_model.dart';
 import 'package:hrm_app/pages/widgets/timekeeping/time_keeping_controller.dart';
 import 'package:hrm_app/utils/app_path.dart';
 import 'package:hrm_app/utils/text_style.dart';
@@ -25,7 +26,7 @@ class TimeKeepingPage extends BaseScreen<TimeKeepingController>{
       ),
       drawer: DrawWidget(),
       body: SingleChildScrollView(
-        child: Column(
+        child:Obx(() => Column(
           children: [
             const SizedBox(height: 40),
             Row(
@@ -49,7 +50,7 @@ class TimeKeepingPage extends BaseScreen<TimeKeepingController>{
                 child: Text("CLICK ĐỂ CHECKIN"),
               ),
               onPressed: () => {
-                // controller.login()
+                controller.postTimeKeeping()
                 // Get.toNamed(AppRouter.routerHome)
               }
             ),
@@ -142,10 +143,73 @@ class TimeKeepingPage extends BaseScreen<TimeKeepingController>{
                   ],
                 )
               )
-            )
+            ),
+            ListTile(
+              title: Text('Thời gian chấm công', style: TextUtils().boldQuickSand.copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.bold
+              )),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Text('Stt', style: TextUtils().boldQuickSand.copyWith(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold
+                            )),
+                      ),
+                      Expanded(
+                        flex: 7,
+                        child: Text('Thời gian điểm danh', style: TextUtils().boldQuickSand.copyWith(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold
+                            )),
+                      )
+                    ],
+                  )
+                )
+              )
+            ),
+            for(int index = 0; index <  controller.timeKeepingModel.length; index++)
+              SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Text((index + 1).toString(), style: TextUtils().mediumQuickSand.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold
+                              )),
+                        ),
+                        Expanded(
+                          flex: 7,
+                          child: Text(controller.timeKeepingModel[index].dateTimeKeeping, style: TextUtils().mediumQuickSand.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold
+                              )),
+                        )
+                      ],
+                    )
+                  )
+                )
+              )
           ]
         )
-      )
+      ))
     );
   }
 }

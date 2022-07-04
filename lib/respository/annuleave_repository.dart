@@ -12,7 +12,7 @@ class AnnuleaveRepository {
   }
 
   Future<String> portAnnuleve(AnnuleaveModel body) async{
-    final data = await provider.post("annuleave/create", body);
+    final data = await provider.post("annuleave/create", body.toJson());
     return data!['response'];
   }
 }

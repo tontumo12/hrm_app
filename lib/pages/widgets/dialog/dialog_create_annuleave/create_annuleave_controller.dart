@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:hrm_app/base/base_controller.dart';
+import 'package:hrm_app/models/annuleave/annuleave_model.dart';
+import 'package:hrm_app/pages/detail_page/detail_controller.dart';
+import 'package:hrm_app/pages/widgets/anunnel/anunnel_controller.dart';
+import 'package:hrm_app/respository/annuleave_repository.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateAnnuleaveController extends BaseController{
   TextEditingController controllerResult = TextEditingController();
@@ -10,6 +17,11 @@ class CreateAnnuleaveController extends BaseController{
 
   RxInt dataChoiceType = 1.obs;
   DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+
+  AnnuleaveRepository annuleaveRepository = AnnuleaveRepository();
+
+  final AnunnelController storeController =
+    Get.put<AnunnelController>(AnunnelController());
 
   void choiceDataChoiceType(value){
     dataChoiceType.value = value;
@@ -69,6 +81,39 @@ class CreateAnnuleaveController extends BaseController{
             ),
           );
         });
+  }
+
+  Future<dynamic> getUsetInfo() async {
+    final pref = await SharedPreferences.getInstance();
+    String data = pref.getString('userInfo') ?? '';
+    return jsonDecode(data);
+  }
+
+  Future<dynamic> postAnnuleave() async {
+    try{
+      print('tunt');
+      dynamic userInfo = await getUsetInfo();
+      print('tunt');
+      AnnuleaveModel body = AnnuleaveModel(
+        annualLeaveId: 0, 
+        dateAnnualLeave: '', 
+        fromTime: fromDate.text, 
+        reason: '', 
+        status: 1, 
+        totalLeave: int.parse(totalDate.text), 
+        toTime: toDate.text, 
+        typeLeave: dataChoiceType.value, 
+        userId: int.parse(userInfo['userid']), 
+        userReview: 1,
+      );
+      print('tunt');
+      final data =  await annuleaveRepository.portAnnuleve(body);
+      print('tunt');
+      storeController.getListDataWorkTodo();
+      return data;
+    } catch(err){
+      print(err);
+    }
   }
 
 }

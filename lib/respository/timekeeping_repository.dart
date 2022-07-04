@@ -12,7 +12,7 @@ class TimeKeepingRepository {
   }
 
   Future<String> portAnnuleve(TimeKeepingModel body) async{
-    final data = await provider.post("timeKeeping/create", body);
+    final data = await provider.post("timeKeeping/create", body.toJson());
     return data!['response'];
   }
 }

@@ -84,14 +84,13 @@ class CreateAnnuleavePage extends BaseScreen<CreateAnnuleaveController>{
                   ),
                   Expanded(
                     flex: 6,
-                    child: InkWell(
-                      onTap: () {
-                        controller.selectDate(type: 1);
-                      },
-                      child: TextField(
+                    child: TextField(
                         readOnly: true,
-                        controller: controller.toDate),
-                    ),
+                        controller: controller.fromDate,
+                          onTap: () {
+                        controller.selectDate(type: 1);
+                        },
+                    )
                   ),
                 ]
               ),
@@ -109,14 +108,12 @@ class CreateAnnuleavePage extends BaseScreen<CreateAnnuleaveController>{
                   ),
                   Expanded(
                     flex: 6,
-                    child: InkWell(
-                      onTap: () {
-                        controller.selectDate(type: 2);
-                      },
-                      child: TextField(
+                    child: TextField(
                         readOnly: true,
-                        controller: controller.fromDate),
-                    ),
+                        controller: controller.toDate,
+                        onTap: () {
+                          controller.selectDate(type: 2);
+                        },),
                   ),
                 ]
               ),
@@ -135,9 +132,8 @@ class CreateAnnuleavePage extends BaseScreen<CreateAnnuleaveController>{
                   Expanded(
                     flex: 6,
                     child: TextField(
-                        readOnly: true,
                         keyboardType: TextInputType.number,
-                        controller: controller.fromDate),
+                        controller: controller.totalDate),
                   ),
                 ]
               ),
@@ -155,7 +151,7 @@ class CreateAnnuleavePage extends BaseScreen<CreateAnnuleaveController>{
                         child: Text("Gửi thông tin"),
                       ),
                       onPressed: () => {
-                        // controller.login()
+                        controller.postAnnuleave()
                         // Get.toNamed(AppRouter.routerHome)
                       }
                     ),
